@@ -27,9 +27,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="2dp"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/arrow"
-                    tools:srcCompat="@drawable/arrow" />
+                    />
 
                 <TextView
                     android:id="@+id/textView"
@@ -189,10 +188,10 @@
                     android:id="@+id/imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@tools:sample/avatars"
+                    android:src="@drawable/location"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView13"
-                    tools:srcCompat="@drawable/location" />
+                    />
 
                 <TextView
                     android:id="@+id/textView14"
@@ -208,11 +207,11 @@
                     android:id="@+id/imageView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@tools:sample/avatars"
+                    android:src="@drawable/arrow_detail"
                     app:layout_constraintBottom_toBottomOf="@+id/textView14"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView13"
-                    tools:srcCompat="@drawable/arrow_detail" />
+                    />
 
                 <View
                     android:id="@+id/view5"
@@ -240,10 +239,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:src="@tools:sample/avatars"
+                    android:src="@drawable/credit_card"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView15"
-                    tools:srcCompat="@drawable/credit_card" />
+                    />
 
                 <TextView
                     android:id="@+id/textView16"
@@ -261,10 +260,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:src="@tools:sample/avatars"
+                    android:src="@drawable/arrow_detail"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView15"
-                    tools:srcCompat="@drawable/arrow_detail" />
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
