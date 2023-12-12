@@ -3,5 +3,6 @@
     <color name="white">#FFFFFFFF</color> <!-- Fully opaque white -->
     <color name="green">#FF18a73e</color> <!-- Fully opaque green -->
     <color name="grey">#FF6f6f78</color> <!-- Fully opaque grey -->
-    <color name="light_grey">#FFebebeb</color> <!-- Fully opaque light grey -->
+    <color name="light_grey">#FFebebeb</color>
+    <color name="ffffff">#FFFFFF</color> <!-- Fully opaque light grey -->
 </resources>

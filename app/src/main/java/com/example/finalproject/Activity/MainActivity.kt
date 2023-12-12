@@ -1,7 +1,9 @@
 package com.example.finalproject.Activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.Adapter.FoodListAdapter
@@ -12,13 +14,20 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapterFoodList: RecyclerView.Adapter<*>
     private lateinit var recyclerViewFood: RecyclerView
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         initRecyclerView()
-    }
+        bottomNavigation();
 
+    }
+    private fun bottomNavigation() {
+        val supportBtn: LinearLayout = findViewById(R.id.supportBtn)
+        supportBtn.setOnClickListener {
+            startActivity(Intent(this@MainActivity, SupportActivity::class.java))
+        }
+    }
     private fun initRecyclerView() {
         val items = ArrayList<FoodDomain>()
         items.add(
