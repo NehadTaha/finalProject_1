@@ -1,6 +1,7 @@
 package com.example.finalproject.Adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
+import com.example.finalproject.Activity.DetailActivity
 import com.example.finalproject.Domain.FoodDomain
 import com.example.finalproject.R
 import java.util.ArrayList
@@ -31,6 +33,12 @@ class FoodListAdapter(private val items: ArrayList<FoodDomain>) : RecyclerView.A
             .load(drawableResourceId)
             .transform(GranularRoundedCorners(30.0F, 30.0F, 0F, 0F))
             .into(holder.pic)
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, DetailActivity::class.java)
+            intent.putExtra("object", items[position])
+            holder.itemView.context.startActivity(intent)
+        }
+
     }
 
     override fun getItemCount(): Int {
