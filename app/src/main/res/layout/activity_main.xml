@@ -40,6 +40,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/homeBtn"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
@@ -61,11 +62,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/home"
-                            android:textColor="@color/black"
-                            android:textAlignment="center"/>
+                            android:textAlignment="center"
+                            android:textColor="@color/black" />
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/cartBtn"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
@@ -87,8 +89,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/cart"
-                            android:textColor="#959595"
-                            android:textAlignment="center" />
+                            android:textAlignment="center"
+                            android:textColor="#959595" />
                     </LinearLayout>
 
                     <LinearLayout

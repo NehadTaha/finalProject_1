@@ -30,12 +30,26 @@ class MainActivity : AppCompatActivity() {
         db = AppDatabase.getInstance(this)
         initRecyclerView()
         navigation();
+        bottomNavigation();
         val settingsBtn: LinearLayout = findViewById(R.id.settingsBtn)
         settingsBtn.setOnClickListener { view ->
             showSettingsMenu(view)
         }
-
     }
+
+    private fun bottomNavigation() {
+        val homeBtn: LinearLayout = findViewById(R.id.homeBtn)
+        val cartBtn: LinearLayout = findViewById(R.id.cartBtn)
+
+        homeBtn.setOnClickListener {
+            startActivity(Intent(this@MainActivity, MainActivity::class.java))
+        }
+
+        cartBtn.setOnClickListener {
+            startActivity(Intent(this@MainActivity, CartActivity::class.java))
+        }
+    }
+
     private fun navigation() {
         val supportBtn: LinearLayout = findViewById(R.id.supportBtn)
         supportBtn.setOnClickListener {

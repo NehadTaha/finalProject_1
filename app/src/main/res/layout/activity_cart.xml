@@ -7,9 +7,25 @@
     android:background="#f3f3f3"
     tools:context=".Activity.CartActivity">
 
+    <TextView
+        android:id="@+id/emptyTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Cart is Empty"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/scrollView"
+        tools:visibility="gone" />
+
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,8 +44,7 @@
                     android:layout_height="wrap_content"
                     android:padding="2dp"
                     android:src="@drawable/arrow"
-                    app:srcCompat="@drawable/arrow"
-                    />
+                    app:srcCompat="@drawable/arrow" />
 
                 <TextView
                     android:id="@+id/textView"
@@ -37,17 +52,17 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="My Cart"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
                     android:textAlignment="center"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/view3"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent">
 
             </androidx.recyclerview.widget.RecyclerView>
 
@@ -55,11 +70,11 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Order Summary"
                 android:textColor="@color/black"
-                android:textStyle="bold"
                 android:textSize="18sp"
-                android:layout_marginTop="16dp"
+                android:textStyle="bold"
 
                 />
 
@@ -129,9 +144,9 @@
                 <View
                     android:id="@+id/view4"
                     android:layout_width="wrap_content"
+                    android:layout_height="1dp"
                     android:layout_marginTop="8dp"
                     android:background="@color/grey"
-                    android:layout_height="1dp"
                     app:layout_constraintEnd_toEndOf="@+id/taxTxt"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView7" />
@@ -147,13 +162,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/view4" />
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/totalTxt"
+                    style="@style/textStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:text="$-"
                     android:textStyle="bold"
-                    style="@style/textStyle"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -172,9 +187,9 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@drawable/white_background"
-                android:padding="8dp"
-                android:layout_height="match_parent">
+                android:padding="8dp">
 
                 <TextView
                     android:id="@+id/textView13"
@@ -191,15 +206,14 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/location"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView13"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
                 <TextView
                     android:id="@+id/textView14"
+                    style="@style/textStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    style="@style/textStyle"
                     android:text="Sherbrooke, QC"
                     app:layout_constraintStart_toEndOf="@+id/imageView"
                     app:layout_constraintTop_toBottomOf="@+id/textView13" />
@@ -211,15 +225,14 @@
                     android:src="@drawable/arrow_detail"
                     app:layout_constraintBottom_toBottomOf="@+id/textView14"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView13"
-                     />
+                    app:layout_constraintTop_toTopOf="@+id/textView13" />
 
                 <View
                     android:id="@+id/view5"
                     android:layout_width="wrap_content"
+                    android:layout_height="1dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
-                    android:layout_height="1dp"
                     android:background="@color/grey"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -242,8 +255,7 @@
                     android:layout_marginTop="8dp"
                     android:src="@drawable/credit_card"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView15"
-                     />
+                    app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
                 <TextView
                     android:id="@+id/textView16"
@@ -263,8 +275,7 @@
                     android:layout_marginTop="8dp"
                     android:src="@drawable/arrow_detail"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView15"
-                    />
+                    app:layout_constraintTop_toTopOf="@+id/textView15" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
