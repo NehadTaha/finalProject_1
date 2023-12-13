@@ -1,14 +1,20 @@
 package com.example.finalproject.Activity
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
+import android.view.View
 import android.widget.LinearLayout
+import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.Adapter.FoodListAdapter
 import com.example.finalproject.Domain.FoodDomain
 import com.example.finalproject.R
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var adapterFoodList: RecyclerView.Adapter<*>
@@ -19,14 +25,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initRecyclerView()
-        bottomNavigation();
+        navigation();
+        val settingsBtn: LinearLayout = findViewById(R.id.settingsBtn)
+        settingsBtn.setOnClickListener { view ->
+            showSettingsMenu(view)
+        }
 
     }
-    private fun bottomNavigation() {
+    private fun navigation() {
         val supportBtn: LinearLayout = findViewById(R.id.supportBtn)
         supportBtn.setOnClickListener {
             startActivity(Intent(this@MainActivity, SupportActivity::class.java))
         }
+
     }
     private fun initRecyclerView() {
         val items = ArrayList<FoodDomain>()
@@ -74,5 +85,61 @@ class MainActivity : AppCompatActivity() {
 
         adapterFoodList = FoodListAdapter(items) // Replace 'FoodListAdapter(items)' with your actual adapter initialization
         recyclerViewFood.adapter = adapterFoodList
+    }
+    private fun showSettingsMenu(view: View) {
+        val popupMenu = PopupMenu(this, view)
+        popupMenu.inflate(R.menu.settings_menu)
+
+        popupMenu.setOnMenuItemClickListener { item: MenuItem ->
+            when (item.itemId) {
+                R.id.menu_time_settings -> {
+                    showTimePickerDialog()
+                    true
+                }
+                R.id.menu_date_settings -> {
+                    showDatePickerDialog()
+                    true
+                }
+                else -> false
+            }
+        }
+        popupMenu.show()
+    }
+
+    private fun showTimePickerDialog() {
+        val calendar = Calendar.getInstance()
+        val hour = calendar.get(Calendar.HOUR_OF_DAY)
+        val minute = calendar.get(Calendar.MINUTE)
+
+        val timePickerDialog = TimePickerDialog(
+            this,
+            TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
+                // Handle the selected time
+                // For example, save it or perform actions with it
+            },
+            hour,
+            minute,
+            true
+        )
+        timePickerDialog.show()
+    }
+
+    private fun showDatePickerDialog() {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(
+            this,
+            DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                // Handle the selected date
+                // For example, save it or perform actions with it
+            },
+            year,
+            month,
+            dayOfMonth
+        )
+        datePickerDialog.show()
     }
 }

@@ -19,6 +19,139 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+                <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorSecondary"
+                    >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:orientation="vertical">
+
+
+                        <ImageView
+                            android:id="@+id/homeimageView"
+                            android:layout_width="30dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="4dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/bottom_btn1"
+                            app:srcCompat="@drawable/bottom_btn1" />
+
+                        <TextView
+                            android:id="@+id/hometextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/home"
+                            android:textColor="@color/black"
+                            android:textAlignment="center"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:orientation="vertical">
+
+
+                        <ImageView
+                            android:id="@+id/cartimageView"
+                            android:layout_width="30dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="4dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/bottom_btn2"
+                            app:srcCompat="@drawable/bottom_btn2" />
+
+                        <TextView
+                            android:id="@id/carttextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cart"
+                            android:textColor="#959595"
+                            android:textAlignment="center" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/supportBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:orientation="vertical">
+
+
+                        <ImageView
+                            android:id="@+id/supportimageView"
+                            android:layout_width="30dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="4dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/bottom_btn3"
+                            app:srcCompat="@drawable/bottom_btn3" />
+
+                        <TextView
+                            android:id="@id/supporttextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/support"
+                            android:textAlignment="center"
+                            android:textColor="#959595" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/settingsBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:orientation="vertical">
+
+
+                        <ImageView
+                            android:id="@+id/settingsimageView"
+                            android:layout_width="30dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="4dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/bottom_btn4"
+                            app:srcCompat="@drawable/bottom_btn4" />
+
+                        <TextView
+                            android:id="@id/settingsTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/settings"
+                            android:textColor="#959595"
+                            android:textAlignment="center" />
+                    </LinearLayout>
+                </LinearLayout>
+                </androidx.appcompat.widget.Toolbar>
+                </com.google.android.material.appbar.AppBarLayout>
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -447,128 +580,4 @@
                 android:paddingStart="16dp" />
         </LinearLayout>
     </ScrollView>
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:layout_width="match_parent"
-            android:layout_gravity="bottom"
-            android:layout_height="match_parent" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.25"
-                    android:orientation="vertical">
-
-
-                    <ImageView
-                        android:id="@+id/homeimageView"
-                        android:layout_width="30dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="4dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/bottom_btn1"
-                        app:srcCompat="@drawable/bottom_btn1" />
-
-                    <TextView
-                        android:id="@+id/hometextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/home"
-                        android:textColor="@color/green"
-                        android:textAlignment="center"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.25"
-                    android:orientation="vertical">
-
-
-                    <ImageView
-                        android:id="@+id/cartimageView"
-                        android:layout_width="30dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="4dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/bottom_btn2"
-                        app:srcCompat="@drawable/bottom_btn2" />
-
-                    <TextView
-                        android:id="@id/carttextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/cart"
-                        android:textColor="#959595"
-                        android:textAlignment="center" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/supportBtn"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.25"
-                    android:orientation="vertical">
-
-
-                    <ImageView
-                        android:id="@+id/supportimageView"
-                        android:layout_width="30dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="4dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/bottom_btn3"
-                        app:srcCompat="@drawable/bottom_btn3" />
-
-                    <TextView
-                        android:id="@id/supporttextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/support"
-                        android:textAlignment="center"
-                        android:textColor="#959595" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.25"
-                    android:orientation="vertical">
-
-
-                    <ImageView
-                        android:id="@+id/settingsimageView"
-                        android:layout_width="30dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="4dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/bottom_btn4"
-                        app:srcCompat="@drawable/bottom_btn4" />
-
-                    <TextView
-                        android:id="@id/settingsTextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/settings"
-                        android:textColor="#959595"
-                        android:textAlignment="center" />
-                </LinearLayout>
-        </LinearLayout>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
