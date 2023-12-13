@@ -11,11 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
 import com.example.finalproject.Activity.DetailActivity
-import com.example.finalproject.Domain.FoodDomain
+import com.example.finalproject.Data.FoodItem
 import com.example.finalproject.R
-import java.util.ArrayList
+import java.io.Serializable
+import kotlin.collections.ArrayList
 
-class FoodListAdapter(private val items: ArrayList<FoodDomain>) : RecyclerView.Adapter<FoodListAdapter.ViewHolder>() {
+class FoodListAdapter(private val items: ArrayList<FoodItem>) : RecyclerView.Adapter<FoodListAdapter.ViewHolder>() {
     private lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,9 +35,12 @@ class FoodListAdapter(private val items: ArrayList<FoodDomain>) : RecyclerView.A
             .transform(GranularRoundedCorners(30.0F, 30.0F, 0F, 0F))
             .into(holder.pic)
         holder.itemView.setOnClickListener {
-            val intent = Intent(holder.itemView.context, DetailActivity::class.java)
-            intent.putExtra("object", items[position])
-            holder.itemView.context.startActivity(intent)
+            val intent = Intent(context, DetailActivity::class.java)
+
+            // Assuming FoodItem implements Serializable or Parcelable
+            intent.putExtra("object", items[position] as Serializable)
+
+            context.startActivity(intent)
         }
 
     }

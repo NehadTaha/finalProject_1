@@ -12,18 +12,22 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.Adapter.FoodListAdapter
-import com.example.finalproject.Domain.FoodDomain
+import com.example.finalproject.Data.AppDatabase
+import com.example.finalproject.Data.FoodItem
 import com.example.finalproject.R
 import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var adapterFoodList: RecyclerView.Adapter<*>
     private lateinit var recyclerViewFood: RecyclerView
+    private lateinit var db: AppDatabase
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        db = AppDatabase.getInstance(this)
         initRecyclerView()
         navigation();
         val settingsBtn: LinearLayout = findViewById(R.id.settingsBtn)
@@ -40,9 +44,10 @@ class MainActivity : AppCompatActivity() {
 
     }
     private fun initRecyclerView() {
-        val items = ArrayList<FoodDomain>()
+        val items = ArrayList<FoodItem>()
         items.add(
-            FoodDomain(
+            FoodItem(
+                UUID.randomUUID().hashCode(),
                 "Cheese Burger",
                 "Satisfy your cravings with our juicy Cheese Burger. \n" +
                         "Served with crispy fries and a drink",
@@ -55,7 +60,8 @@ class MainActivity : AppCompatActivity() {
             )
         )
         items.add(
-            FoodDomain(
+            FoodItem(
+                UUID.randomUUID().hashCode(),
                 "Pizza Pepperoni",
                 "Get the taste of Italy with our delicious Pepperoni Pizza",
                 "fast_2",
@@ -67,7 +73,8 @@ class MainActivity : AppCompatActivity() {
             )
         )
         items.add(
-            FoodDomain(
+            FoodItem(
+                UUID.randomUUID().hashCode(),
                 "Vegetable Pizza",
                 "Looking for a healthier option? Try our vegetable Pizza",
                 "fast_3",
@@ -76,6 +83,9 @@ class MainActivity : AppCompatActivity() {
                 100,
                 4.5,
                 0
+
+
+
             )
         )
 
@@ -141,5 +151,10 @@ class MainActivity : AppCompatActivity() {
             dayOfMonth
         )
         datePickerDialog.show()
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        // Close the database connection when the Activity is destroyed
+        db.close()
     }
 }

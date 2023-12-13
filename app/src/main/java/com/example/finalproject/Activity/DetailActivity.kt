@@ -1,13 +1,14 @@
 package com.example.finalproject.Activity
 
 import ManagementCart
+import TinyDB
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.example.finalproject.Domain.FoodDomain
+import com.example.finalproject.Data.FoodItem
 import com.example.finalproject.R
 
 class DetailActivity : AppCompatActivity() {
@@ -22,21 +23,24 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var caloryTxt: TextView
     private lateinit var timeTxt: TextView
     private lateinit var picFood: ImageView
-    private lateinit var foodItem: FoodDomain
+
     private var numberOrder = 1
     private lateinit var managementCart: ManagementCart
+    private lateinit var tinyDB: TinyDB
+    private lateinit var foodItem:FoodItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
         managementCart = ManagementCart(this)
+        tinyDB = TinyDB(this)
         initView()
         getBundle()
     }
 
     private fun getBundle() {
-        foodItem = intent.getSerializableExtra("object") as FoodDomain
+        foodItem = intent.getSerializableExtra("object") as FoodItem
         val drawableResourceId = resources.getIdentifier(foodItem.picUrl, "drawable", packageName)
         Glide.with(this)
             .load(drawableResourceId)
