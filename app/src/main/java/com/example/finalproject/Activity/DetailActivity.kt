@@ -23,6 +23,8 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var caloryTxt: TextView
     private lateinit var timeTxt: TextView
     private lateinit var picFood: ImageView
+    private lateinit var backBtn: ImageView
+
 
     private var numberOrder = 1
     private lateinit var managementCart: ManagementCart
@@ -37,8 +39,12 @@ class DetailActivity : AppCompatActivity() {
         tinyDB = TinyDB(this)
         initView()
         getBundle()
+        setVariable()
     }
 
+    private fun setVariable() {
+        backBtn.setOnClickListener { finish() }
+    }
     private fun getBundle() {
         foodItem = intent.getSerializableExtra("object") as FoodItem
         val drawableResourceId = resources.getIdentifier(foodItem.picUrl, "drawable", packageName)
@@ -87,5 +93,7 @@ class DetailActivity : AppCompatActivity() {
         picFood = findViewById(R.id.foodPic)
         startTxt = findViewById(R.id.StarTxt)
         caloryTxt = findViewById(R.id.calTxt)
+        backBtn = findViewById(R.id.backBtnn)
+
     }
 }
