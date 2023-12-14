@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         val items = ArrayList<FoodItem>()
         items.add(
             FoodItem(
-                UUID.randomUUID().hashCode(),
+                UUID.randomUUID().toString(),
                 "Cheese Burger",
                 "Satisfy your cravings with our juicy Cheese Burger. \n" +
                         "Served with crispy fries and a drink",
@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity() {
         )
         items.add(
             FoodItem(
-                UUID.randomUUID().hashCode(),
+                UUID.randomUUID().toString(),
                 "Pizza Pepperoni",
                 "Get the taste of Italy with our delicious Pepperoni Pizza",
                 "fast_2",
@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity() {
         )
         items.add(
             FoodItem(
-                UUID.randomUUID().hashCode(),
+                UUID.randomUUID().toString(),
                 "Vegetable Pizza",
                 "Looking for a healthier option? Try our vegetable Pizza",
                 "fast_3",

@@ -12,11 +12,18 @@ interface FoodItemDao {
     fun getAllFoodItems(): List<FoodItem>
 
     @Insert
-    fun insertFoodItem(foodDomain: FoodItem)
+    fun insertFoodItem(foodItem: FoodItem)
 
     @Update
-    suspend fun updateFoodItem(foodDomain: FoodItem)
+    suspend fun updateFoodItem(foodItem: FoodItem)
 
     @Delete
-    suspend fun deleteFoodItem(foodDomain: FoodItem)
+    suspend fun deleteFoodItem(foodItem: FoodItem)
+
+    @Query("DELETE FROM food_items")
+    fun deleteAll()
+
+    @Query("SELECT * FROM food_items WHERE id = :id")
+    fun getFoodItemById(id: String): FoodItem?
+
 }

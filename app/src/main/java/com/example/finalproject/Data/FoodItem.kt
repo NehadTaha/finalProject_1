@@ -2,10 +2,11 @@ package com.example.finalproject.Data
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.io.Serializable
+import java.util.UUID
 
 @Entity(tableName = "food_items")
 data class FoodItem(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @PrimaryKey val id: String = UUID.randomUUID().toString(),
     var title: String,
     var description: String,
     var picUrl: String,

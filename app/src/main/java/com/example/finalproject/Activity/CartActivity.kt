@@ -13,8 +13,8 @@ import com.example.finalproject.Helper.ChangeNumberItemsListener
 import com.example.finalproject.Adapter.CartListAdapter
 import com.example.finalproject.R
 
-class CartActivity : AppCompatActivity() {
-    private lateinit var adapter: RecyclerView.Adapter<*>
+class CartActivity : AppCompatActivity(), ChangeNumberItemsListener {
+    private lateinit var adapter: CartListAdapter
     private lateinit var recyclerViewList: RecyclerView
     private lateinit var managementCart: ManagementCart
     private lateinit var totalFeeTxt: TextView
@@ -37,23 +37,27 @@ class CartActivity : AppCompatActivity() {
         setVariable()
     }
 
+    override fun changed() {
+        calculateCart()
+       // refreshCart() // Added: Refresh the cart after any change in items
+    }
+
+    private fun refreshCart() {
+        initList() // Refresh the cart by reinitializing the list
+    }
+
     private fun setVariable() {
         backBtn.setOnClickListener { finish() }
     }
 
     private fun initList() {
+        recyclerViewList = findViewById(R.id.view3)
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerViewList.layoutManager = linearLayoutManager
 
         managementCart.getListCart { cartList ->
             runOnUiThread {
-                // Update UI components or set adapters here
-                adapter = CartListAdapter(cartList, this, object : ChangeNumberItemsListener {
-                    override fun changed() {
-                        calculateCart()
-                    }
-                })
-
+                adapter = CartListAdapter(cartList, this, this)
                 recyclerViewList.adapter = adapter
 
                 if (cartList.isEmpty()) {
@@ -66,7 +70,6 @@ class CartActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun calculateCart() {
         managementCart.getTotalFee { cartTotal ->
@@ -89,7 +92,6 @@ class CartActivity : AppCompatActivity() {
         taxTxt = findViewById(R.id.taxTxt)
         deliveryTxt = findViewById(R.id.deliveryTxt)
         totalTxt = findViewById(R.id.totalTxt)
-        recyclerViewList = findViewById(R.id.view3)
         scrollView = findViewById(R.id.scrollView)
         backBtn = findViewById(R.id.backBtn)
         emptyTxt = findViewById(R.id.emptyTxt)
