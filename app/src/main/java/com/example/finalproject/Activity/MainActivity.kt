@@ -29,12 +29,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         db = AppDatabase.getInstance(this)
         initRecyclerView()
-        navigation();
+        navigationToSupport();
+        navigationToCart();
         bottomNavigation();
         val settingsBtn: LinearLayout = findViewById(R.id.settingsBtn)
         settingsBtn.setOnClickListener { view ->
             showSettingsMenu(view)
         }
+        val cartBtn: LinearLayout = findViewById(R.id.cartBtn)
+        cartBtn.setOnClickListener {
+            // Create an intent to start the CartActivity
+            val intent = Intent(this@MainActivity, CartActivity::class.java)
+            startActivity(intent) // Start the CartActivity
+        }
+
     }
 
     private fun bottomNavigation() {
@@ -49,8 +57,15 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this@MainActivity, CartActivity::class.java))
         }
     }
+    private fun navigationToCart() {
+        val supportBtn: LinearLayout = findViewById(R.id.cartBtn)
+        supportBtn.setOnClickListener {
+            startActivity(Intent(this@MainActivity, CartActivity::class.java))
+        }
 
-    private fun navigation() {
+    }
+
+    private fun navigationToSupport() {
         val supportBtn: LinearLayout = findViewById(R.id.supportBtn)
         supportBtn.setOnClickListener {
             startActivity(Intent(this@MainActivity, SupportActivity::class.java))

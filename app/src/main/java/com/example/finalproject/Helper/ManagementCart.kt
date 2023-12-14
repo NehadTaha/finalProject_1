@@ -3,8 +3,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.finalproject.Data.FoodItem
 import com.example.finalproject.Helper.ChangeNumberItemsListener
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ManagementCart(private val context: Context) {
     private val tinyDB = TinyDB(context)
@@ -16,12 +18,15 @@ class ManagementCart(private val context: Context) {
         }
     }
 
-    fun getListCart(callback: (List<FoodItem>) -> Unit) {
+    fun getListCart(callback: (ArrayList<FoodItem>) -> Unit) {
         GlobalScope.launch {
-            val cartList = tinyDB.getAllFoodItems()
-            callback(cartList)
+            val cartList = tinyDB.getAllFoodItems() as ArrayList<FoodItem>
+            withContext(Dispatchers.Main) {
+                callback(cartList)
+            }
         }
     }
+
     private fun showToastOnMainThread(message: String) {
         // Switch to the main thread to display the Toast
         (context as? AppCompatActivity)?.runOnUiThread {
@@ -33,30 +38,51 @@ class ManagementCart(private val context: Context) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
-    fun minusNumberFood(listfood: ArrayList<FoodItem>, position: Int, changeNumberItemsListener: ChangeNumberItemsListener) {
-        if (listfood[position].numberinCart == 1) {
+    fun minusNumberFood(
+        listfood: ArrayList<FoodItem>,
+        position: Int,
+        changeNumberItemsListener: ChangeNumberItemsListener
+    ) {
+        val item = listfood[position]
+        if (item.numberinCart == 1) {
+            GlobalScope.launch {
+                tinyDB.deleteFoodItem(item)
+                showToastOnMainThread("Removed from your Cart")
+            }
             listfood.removeAt(position)
         } else {
-            listfood[position].numberinCart = listfood[position].numberinCart - 1
+            item.numberinCart = item.numberinCart - 1
+            GlobalScope.launch {
+                tinyDB.saveFoodItem(item)
+            }
         }
-        tinyDB.putListObject("CartList", listfood)
         changeNumberItemsListener.changed()
     }
 
-    fun plusNumberFood(listfood: ArrayList<FoodItem>, position: Int, changeNumberItemsListener: ChangeNumberItemsListener) {
-        listfood[position].numberinCart = listfood[position].numberinCart + 1
-        tinyDB.putListObject("CartList", listfood)
+    fun plusNumberFood(
+        listfood: ArrayList<FoodItem>,
+        position: Int,
+        changeNumberItemsListener: ChangeNumberItemsListener
+    ) {
+        val item = listfood[position]
+        item.numberinCart = item.numberinCart + 1
+        GlobalScope.launch {
+            tinyDB.saveFoodItem(item)
+        }
         changeNumberItemsListener.changed()
     }
 
-    fun getTotalFee(): Double {
-        val listfood2 = getListCart()
-        var fee = 0.0
-        for (item in listfood2) {
-            fee += item.price * item.numberinCart
-        }
-        return fee
-    }
 
+
+    fun getTotalFee(callback: (Double) -> Unit) {
+        getListCart { cartList ->
+            var fee = 0.0
+            for (item in cartList) {
+                fee += item.price * item.numberinCart
+            }
+            callback(fee)
+        }
+    }
 
 }
+

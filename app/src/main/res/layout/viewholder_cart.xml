@@ -15,12 +15,11 @@
 
         android:layout_margin="4dp"
         android:scaleType="centerCrop"
-        android:src="@tools:sample/avatars"
+        android:src="@drawable/fast_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:srcCompat="@drawable/fast_1" />
+        app:layout_constraintVertical_bias="0.0"/>
 
     <TextView
         android:id="@+id/titleTxt"
@@ -71,7 +70,7 @@
         app:layout_constraintTop_toTopOf="@+id/feeEachItem">
 
         <TextView
-            android:id="@+id/textView23"
+            android:id="@+id/minusCartBtn"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:text="-"
@@ -86,7 +85,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView24"
+            android:id="@+id/numberitemTxt"
             style="@style/textStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -94,12 +93,12 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView28"
-            app:layout_constraintStart_toEndOf="@+id/textView23"
+            app:layout_constraintEnd_toStartOf="@+id/plusCardBtn"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView28"
+            android:id="@+id/plusCardBtn"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_margin="4dp"

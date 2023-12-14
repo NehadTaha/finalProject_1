@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.Helper.ChangeNumberItemsListener
 import com.example.finalproject.Adapter.CartListAdapter
-import com.example.finalproject.Manager.ManagementCart
 import com.example.finalproject.R
 
 class CartActivity : AppCompatActivity() {
@@ -45,35 +44,44 @@ class CartActivity : AppCompatActivity() {
     private fun initList() {
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerViewList.layoutManager = linearLayoutManager
-        adapter = CartListAdapter(managementCart.getListCart(), this, object : ChangeNumberItemsListener {
-            override fun changed() {
-                calculateCart()
+
+        managementCart.getListCart { cartList ->
+            runOnUiThread {
+                // Update UI components or set adapters here
+                adapter = CartListAdapter(cartList, this, object : ChangeNumberItemsListener {
+                    override fun changed() {
+                        calculateCart()
+                    }
+                })
+
+                recyclerViewList.adapter = adapter
+
+                if (cartList.isEmpty()) {
+                    emptyTxt.visibility = View.VISIBLE
+                    scrollView.visibility = View.GONE
+                } else {
+                    emptyTxt.visibility = View.GONE
+                    scrollView.visibility = View.VISIBLE
+                }
             }
-        })
-
-        recyclerViewList.adapter = adapter
-
-        if (managementCart.getListCart().isEmpty()) {
-            emptyTxt.visibility = View.VISIBLE
-            scrollView.visibility = View.GONE
-        } else {
-            emptyTxt.visibility = View.GONE
-            scrollView.visibility = View.VISIBLE
         }
     }
 
+
     private fun calculateCart() {
-        val percentTax = 0.02
-        val delivery = 10.0
-        tax = Math.round(managementCart.getTotalFee() * percentTax * 100.0) / 100.0
+        managementCart.getTotalFee { cartTotal ->
+            val percentTax = 0.02
+            val delivery = 10.0
+            tax = Math.round(cartTotal * percentTax * 100.0) / 100.0
 
-        val total = Math.round(managementCart.getTotalFee() + tax + delivery * 100.0) / 100
-        val itemTotal = Math.round(managementCart.getTotalFee() * 100.0) / 100.0
+            val total = Math.round(cartTotal + tax + delivery * 100.0) / 100
+            val itemTotal = Math.round(cartTotal * 100.0) / 100.0
 
-        totalFeeTxt.text = "$$itemTotal"
-        taxTxt.text = "$$tax"
-        deliveryTxt.text = "$$delivery"
-        totalTxt.text = "$$total"
+            totalFeeTxt.text = "$$itemTotal"
+            taxTxt.text = "$$tax"
+            deliveryTxt.text = "$$delivery"
+            totalTxt.text = "$$total"
+        }
     }
 
     private fun initView() {

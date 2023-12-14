@@ -12,13 +12,15 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
 import com.example.finalproject.Data.FoodItem
 import com.example.finalproject.Helper.ChangeNumberItemsListener
-import com.example.finalproject.Manager.ManagementCart
 import com.example.finalproject.R
 import java.util.ArrayList
 
-class CartListAdapter(private val listFoodSelected: ArrayList<FoodItem>, private val context: Context, private val changeNumberItemsListener: ChangeNumberItemsListener) : RecyclerView.Adapter<CartListAdapter.ViewHolder>() {
+class CartListAdapter(private val listFoodSelected: ArrayList<FoodItem>, private val context: Context,
+                      private val changeNumberItemsListener: ChangeNumberItemsListener) :
+    RecyclerView.Adapter<CartListAdapter.ViewHolder>() {
 
     private val managementCart: ManagementCart = ManagementCart(context)
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflate = LayoutInflater.from(parent.context).inflate(R.layout.viewholder_cart, parent, false)
@@ -39,17 +41,11 @@ class CartListAdapter(private val listFoodSelected: ArrayList<FoodItem>, private
             .into(holder.pic)
 
         holder.plusItem.setOnClickListener {
-            managementCart.plusNumberFood(listFoodSelected, position) {
-                notifyDataSetChanged()
-                changeNumberItemsListener.changed()
-            }
+            managementCart.plusNumberFood(listFoodSelected, position, changeNumberItemsListener) // Update function signature
         }
 
         holder.minusItem.setOnClickListener {
-            managementCart.minusNumberFood(listFoodSelected, position) {
-                notifyDataSetChanged()
-                changeNumberItemsListener.changed()
-            }
+            managementCart.minusNumberFood(listFoodSelected, position, changeNumberItemsListener) // Update function signature
         }
     }
 
