@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
+import com.example.finalproject.Activity.CartActivity
 import com.example.finalproject.Activity.CartUpdateListener
 import com.example.finalproject.Data.FoodItem
 import com.example.finalproject.Helper.ChangeNumberItemsListener
@@ -64,6 +65,9 @@ class CartListAdapter(private val listFoodSelected: ArrayList<FoodItem>, private
            // Update the price per item
             val total = Math.round(listFoodSelected[position].numberinCart * pricePerItem)
             holder.totalEachItem.text = "$$total"
+
+
+
 
 
 

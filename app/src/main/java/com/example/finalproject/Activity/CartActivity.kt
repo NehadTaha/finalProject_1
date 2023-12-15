@@ -98,7 +98,7 @@ class CartActivity : AppCompatActivity(), ChangeNumberItemsListener, CartUpdateL
         }
     }
 
-    private fun calculateCart() {
+    public fun calculateCart() {
         managementCart.getTotalFee { cartTotal ->
             val percentTax = 0.02
             val delivery = 10.0

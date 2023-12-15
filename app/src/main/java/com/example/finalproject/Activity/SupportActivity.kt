@@ -24,21 +24,26 @@ class SupportActivity : AppCompatActivity() {
         val messageEditText: EditText = findViewById(R.id.messageEditText)
         val message = messageEditText.text.toString()
 
-        val intent = Intent(Intent.ACTION_SENDTO).apply {
-            data = Uri.parse("mailto:your_email@example.com") // Replace with your email address
+        val intent = Intent(Intent.ACTION_SEND).apply {
+            type = "message/rfc822"
+            putExtra(
+                Intent.EXTRA_EMAIL,
+                arrayOf("Your email")
+            ) // Replace with your email address
             putExtra(Intent.EXTRA_SUBJECT, "Support Request") // Subject of the email
             putExtra(Intent.EXTRA_TEXT, message) // Body of the email
         }
 
         if (intent.resolveActivity(packageManager) != null) {
-            startActivity(intent)
+            startActivity(Intent.createChooser(intent, "Send Email"))
             showToast("Message sent")
         } else {
             showToast("No email app available")
         }
     }
 
-    private fun showToast(message: String) {
+
+            private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
