@@ -19,6 +19,7 @@ class CartListAdapter(private val listFoodSelected: ArrayList<FoodItem>, private
                       private val changeNumberItemsListener: ChangeNumberItemsListener) :
     RecyclerView.Adapter<CartListAdapter.ViewHolder>() {
 
+
     private val managementCart: ManagementCart = ManagementCart(context)
 
 
@@ -52,14 +53,19 @@ class CartListAdapter(private val listFoodSelected: ArrayList<FoodItem>, private
     override fun getItemCount(): Int {
         return listFoodSelected.size
     }
+    fun updateCartItems(updatedList: ArrayList<FoodItem>) {
+        listFoodSelected.clear()
+        listFoodSelected.addAll(updatedList)
+        notifyDataSetChanged()
+    }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.findViewById(R.id.titleTxt)
         val pic: ImageView = itemView.findViewById(R.id.pic2)
         val feeEachItem: TextView = itemView.findViewById(R.id.feeEachItem)
         val totalEachItem: TextView = itemView.findViewById(R.id.totalEachItem)
-        val plusItem: TextView = itemView.findViewById(R.id.plusCardBtn)
-        val minusItem: TextView = itemView.findViewById(R.id.minusCartBtn)
-        val num: TextView = itemView.findViewById(R.id.numberitemTxt)
+        val plusItem: TextView = itemView.findViewById(R.id.plusBtn)
+        val minusItem: TextView = itemView.findViewById(R.id.minusBtn)
+        val num: TextView = itemView.findViewById(R.id.numberitemDetaiTxt)
     }
 }

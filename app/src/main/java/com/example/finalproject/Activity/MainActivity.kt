@@ -1,8 +1,10 @@
 package com.example.finalproject.Activity
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -31,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         initRecyclerView()
         navigationToSupport();
         navigationToCart();
-        bottomNavigation();
+        topNavigation();
         val settingsBtn: LinearLayout = findViewById(R.id.settingsBtn)
         settingsBtn.setOnClickListener { view ->
             showSettingsMenu(view)
@@ -45,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun bottomNavigation() {
+    private fun topNavigation() {
         val homeBtn: LinearLayout = findViewById(R.id.homeBtn)
         val cartBtn: LinearLayout = findViewById(R.id.cartBtn)
 
@@ -56,6 +58,25 @@ class MainActivity : AppCompatActivity() {
         cartBtn.setOnClickListener {
             startActivity(Intent(this@MainActivity, CartActivity::class.java))
         }
+        val findUsBtn: LinearLayout = findViewById(R.id.findUsBtn)
+        findUsBtn.setOnClickListener {
+            // Replace these coordinates with the actual latitude and longitude of your location
+            val latitude = 37.7749
+            val longitude = -122.4194
+
+            // Open Google Maps with the specified location
+            val gmmIntentUri = Uri.parse("geo:$latitude,$longitude")
+            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+
+            if (mapIntent.resolveActivity(packageManager) != null) {
+                startActivity(mapIntent)
+            } else {
+                // Google Maps app is not installed, handle this scenario
+                // For example, show a message or redirect to the Play Store to install Google Maps
+            }
+        }
+
     }
     private fun navigationToCart() {
         val supportBtn: LinearLayout = findViewById(R.id.cartBtn)
@@ -139,11 +160,14 @@ class MainActivity : AppCompatActivity() {
                     showDatePickerDialog()
                     true
                 }
+
                 else -> false
             }
         }
         popupMenu.show()
     }
+
+
 
     private fun showTimePickerDialog() {
         val calendar = Calendar.getInstance()
@@ -186,4 +210,5 @@ class MainActivity : AppCompatActivity() {
         // Close the database connection when the Activity is destroyed
         db.close()
     }
+
 }

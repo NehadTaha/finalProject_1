@@ -48,22 +48,27 @@ class ManagementCart(private val context: Context) {
             GlobalScope.launch {
                 tinyDB.deleteFoodItem(item)
                 showToastOnMainThread("Removed from your Cart")
+                listfood.removeAt(position)
+                changeNumberItemsListener.changed()
             }
-            listfood.removeAt(position)
         } else {
-            item.numberinCart = item.numberinCart - 1
+            item.numberinCart -= 1
             GlobalScope.launch {
                 tinyDB.saveFoodItem(item)
+                changeNumberItemsListener.changed()
             }
         }
-        changeNumberItemsListener.changed()
     }
-
     fun plusNumberFood(
         listfood: ArrayList<FoodItem>,
         position: Int,
         changeNumberItemsListener: ChangeNumberItemsListener
     ) {
+        if (listfood.isEmpty()) {
+            // Handle the case when the list is empty
+            return
+        }
+
         val item = listfood[position]
         item.numberinCart = item.numberinCart + 1
         GlobalScope.launch {
@@ -81,6 +86,14 @@ class ManagementCart(private val context: Context) {
                 fee += item.price * item.numberinCart
             }
             callback(fee)
+        }
+    }
+    fun deleteFoodIfZero(item: FoodItem) {
+        if (item.numberinCart == 0) {
+            GlobalScope.launch {
+                tinyDB.deleteFoodItem(item)
+                showToastOnMainThread("Removed from your Cart")
+            }
         }
     }
 

@@ -1,6 +1,8 @@
 package com.example.finalproject.Activity
 
 import ManagementCart
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -35,10 +37,15 @@ class CartActivity : AppCompatActivity(), ChangeNumberItemsListener {
         initView()
         initList()
         setVariable()
+        changed()
+        refreshCart()
+        goToMap()
     }
 
     override fun changed() {
+        //initList()
         calculateCart()
+
        // refreshCart() // Added: Refresh the cart after any change in items
     }
 
@@ -49,9 +56,23 @@ class CartActivity : AppCompatActivity(), ChangeNumberItemsListener {
     private fun setVariable() {
         backBtn.setOnClickListener { finish() }
     }
+    private fun goToMap(){
+        val addressTextView = findViewById<TextView>(R.id.textView14) // Assuming textView14 holds the delivery address
+        val address = addressTextView.text.toString()
 
+        val mapButton = findViewById<ImageView>(R.id.mapArrow) // Assuming imageView3 is your arrow button
+        mapButton.setOnClickListener {
+            val gmmIntentUri = Uri.parse("geo:0,0?q=$address")
+            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+
+            if (mapIntent.resolveActivity(packageManager) != null) {
+                startActivity(mapIntent)
+            }
+        }
+    }
     private fun initList() {
-        recyclerViewList = findViewById(R.id.view3)
+        recyclerViewList = findViewById(R.id.cartRecyclerView)
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerViewList.layoutManager = linearLayoutManager
 
@@ -77,8 +98,9 @@ class CartActivity : AppCompatActivity(), ChangeNumberItemsListener {
             val delivery = 10.0
             tax = Math.round(cartTotal * percentTax * 100.0) / 100.0
 
-            val total = Math.round(cartTotal + tax + delivery * 100.0) / 100
+
             val itemTotal = Math.round(cartTotal * 100.0) / 100.0
+            val total = tax + itemTotal+delivery
 
             totalFeeTxt.text = "$$itemTotal"
             taxTxt.text = "$$tax"

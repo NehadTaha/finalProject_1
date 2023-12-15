@@ -6,4 +6,5 @@
     <item
         android:id="@+id/menu_date_settings"
         android:title="Date Settings"/>
+    
 </menu>
