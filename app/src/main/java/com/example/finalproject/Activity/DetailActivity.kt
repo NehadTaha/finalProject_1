@@ -88,7 +88,7 @@ class DetailActivity : AppCompatActivity() {
         feeTxt = findViewById(R.id.priceTxt)
         titleTxt = findViewById(R.id.titleTxt)
         descriptionTxt = findViewById(R.id.descriptionTxt)
-        numberOrderTxt = findViewById(R.id.numberitemDetaiTxt)
+        numberOrderTxt = findViewById(R.id.numberitemTxt)
         plusBtn = findViewById(R.id.plusBtn)
         minusBtn = findViewById(R.id.minusBtn)
         picFood = findViewById(R.id.foodPic)

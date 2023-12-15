@@ -96,6 +96,5 @@ class ManagementCart(private val context: Context) {
             }
         }
     }
-
 }
 

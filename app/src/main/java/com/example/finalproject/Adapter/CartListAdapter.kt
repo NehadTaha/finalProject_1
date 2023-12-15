@@ -10,13 +10,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
+import com.example.finalproject.Activity.CartUpdateListener
 import com.example.finalproject.Data.FoodItem
 import com.example.finalproject.Helper.ChangeNumberItemsListener
 import com.example.finalproject.R
 import java.util.ArrayList
 
 class CartListAdapter(private val listFoodSelected: ArrayList<FoodItem>, private val context: Context,
-                      private val changeNumberItemsListener: ChangeNumberItemsListener) :
+                      private val changeNumberItemsListener: ChangeNumberItemsListener,
+                      private val cartUpdateListener: CartUpdateListener) :
     RecyclerView.Adapter<CartListAdapter.ViewHolder>() {
 
 
@@ -34,6 +36,7 @@ class CartListAdapter(private val listFoodSelected: ArrayList<FoodItem>, private
         holder.totalEachItem.text = "$${Math.round(listFoodSelected[position].numberinCart * listFoodSelected[position].price)}"
         holder.num.text = listFoodSelected[position].numberinCart.toString()
 
+
         val drawableResourceId = holder.itemView.context.resources.getIdentifier(listFoodSelected[position].picUrl, "drawable", holder.itemView.context.packageName)
 
         Glide.with(holder.itemView.context)
@@ -42,11 +45,30 @@ class CartListAdapter(private val listFoodSelected: ArrayList<FoodItem>, private
             .into(holder.pic)
 
         holder.plusItem.setOnClickListener {
-            managementCart.plusNumberFood(listFoodSelected, position, changeNumberItemsListener) // Update function signature
+            managementCart.plusNumberFood(listFoodSelected, position, changeNumberItemsListener)
+            holder.num.text = listFoodSelected[position].numberinCart.toString()
+            val pricePerItem = listFoodSelected[position].price
+            holder.feeEachItem.text = "$${pricePerItem}"
+           // Update the price per item
+            val total = Math.round(listFoodSelected[position].numberinCart * pricePerItem)
+            holder.totalEachItem.text = "$$total"
+            cartUpdateListener.onCartUpdated()
+
         }
 
         holder.minusItem.setOnClickListener {
-            managementCart.minusNumberFood(listFoodSelected, position, changeNumberItemsListener) // Update function signature
+            managementCart.minusNumberFood(listFoodSelected, position, changeNumberItemsListener)
+            holder.num.text = listFoodSelected[position].numberinCart.toString()
+            val pricePerItem = listFoodSelected[position].price
+            holder.feeEachItem.text = "$${pricePerItem}"
+           // Update the price per item
+            val total = Math.round(listFoodSelected[position].numberinCart * pricePerItem)
+            holder.totalEachItem.text = "$$total"
+
+
+
+
+        // Update function signature
         }
     }
 
@@ -59,6 +81,7 @@ class CartListAdapter(private val listFoodSelected: ArrayList<FoodItem>, private
         notifyDataSetChanged()
     }
 
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.findViewById(R.id.titleTxt)
         val pic: ImageView = itemView.findViewById(R.id.pic2)
@@ -66,6 +89,6 @@ class CartListAdapter(private val listFoodSelected: ArrayList<FoodItem>, private
         val totalEachItem: TextView = itemView.findViewById(R.id.totalEachItem)
         val plusItem: TextView = itemView.findViewById(R.id.plusBtn)
         val minusItem: TextView = itemView.findViewById(R.id.minusBtn)
-        val num: TextView = itemView.findViewById(R.id.numberitemDetaiTxt)
+        val num: TextView = itemView.findViewById(R.id.numberitemTxt)
     }
 }

@@ -15,7 +15,7 @@ import com.example.finalproject.Helper.ChangeNumberItemsListener
 import com.example.finalproject.Adapter.CartListAdapter
 import com.example.finalproject.R
 
-class CartActivity : AppCompatActivity(), ChangeNumberItemsListener {
+class CartActivity : AppCompatActivity(), ChangeNumberItemsListener, CartUpdateListener {
     private lateinit var adapter: CartListAdapter
     private lateinit var recyclerViewList: RecyclerView
     private lateinit var managementCart: ManagementCart
@@ -38,8 +38,15 @@ class CartActivity : AppCompatActivity(), ChangeNumberItemsListener {
         initList()
         setVariable()
         changed()
+        onCartUpdated()
         refreshCart()
         goToMap()
+
+
+    }
+    override fun onCartUpdated() {
+        // Recalculate the cart when notified about updates from the adapter
+        calculateCart()
     }
 
     override fun changed() {
@@ -75,10 +82,9 @@ class CartActivity : AppCompatActivity(), ChangeNumberItemsListener {
         recyclerViewList = findViewById(R.id.cartRecyclerView)
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerViewList.layoutManager = linearLayoutManager
-
         managementCart.getListCart { cartList ->
             runOnUiThread {
-                adapter = CartListAdapter(cartList, this, this)
+                adapter = CartListAdapter(cartList, this, this,this)
                 recyclerViewList.adapter = adapter
 
                 if (cartList.isEmpty()) {
